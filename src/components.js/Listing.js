@@ -2,6 +2,9 @@ import React from "react";
 import '../css/main.css'
 
 function Listing({ items = [] }) {
+    if (!Array.isArray(items) || items.length === 0) {
+        return <div>Ошибка: передан пустой массив или не массив</div>
+    }
     return (
         <div className="item-list">
             {items.map((item) => (
@@ -15,9 +18,9 @@ function Listing({ items = [] }) {
                     </div>
                     <div className="item-details">
                         <p className="item-title">
-                            {item.title.length > 50
-                                ? item.title.substr(0, 50) + "..."
-                                : item.title}
+                        {item.title && item.title.length > 50
+    ? item.title.substr(0, 50) + "..."
+    : item.title}
                         </p>
                         <p className="item-price">
                             {item.currency_code === "USD" ? "$" : null}
